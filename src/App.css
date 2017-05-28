@@ -5,7 +5,9 @@
 
 .App {
   font-family: 'Raleway-Regular';
-  text-align: center;
+  background-color: #202020;
+  color: #f8f8f8;
+  height: 100vh;
 }
 
 .App-logo {

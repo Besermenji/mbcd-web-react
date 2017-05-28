@@ -1,0 +1,9 @@
+.login-margin-top {
+  margin-top: 25vh;
+}
+
+.login-border {
+  border-right-style: solid;
+  border-right-color: #f8f8f8;
+  border-width: 2px;
+}
