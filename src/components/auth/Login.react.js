@@ -1,8 +1,22 @@
 import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+
 import './css/login.css';
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmitBind = (...args) => this.onSubmit(...args);
+  }
+
+  onSubmit(values) {
+    console.log("AADasdlmaskldmaklsdmklasmdklasmdklasmkldmaskld", values);
+  }
+
  render() {
+   const {
+     handleSubmit,
+   } = this.props;
    return (
      <div className="container-fluid">
         <div className="row">
@@ -11,20 +25,26 @@ class Login extends Component {
               <div className="col-md-6 login-border">
                 <div className="row">
                		<div className="col-md-12">
-               			<form>
+               			<form onSubmit={handleSubmit(this.onSubmitBind)}>
 
                				<div className="form-group">
-               					<label for="exampleInputEmail1">
+               					<label htmlFor="userEmail">
                						Email address
                					</label>
-               					<input type="email" className="form-control" id="exampleInputEmail1" />
+                        <Field name="userEmail"
+                               component="input"
+                               type="email"
+                               className="form-control"
+                               id="userEmail"
+                               autoFocus
+                               />
                				</div>
 
                				<div className="form-group">
-               					<label for="exampleInputPassword1">
+               					<label htmlFor="userPassword">
                						Password
                					</label>
-               					<input type="password" className="form-control" id="exampleInputPassword1" />
+                        <Field name="userPassword" component="input" type="password" className="form-control" id="userPassword"/>
                				</div>
                				<button type="submit" className="btn btn-default pull-right">
                					Submit
@@ -46,4 +66,9 @@ class Login extends Component {
    );
  }
 }
+// Decorate the form component
+Login = reduxForm({
+  form: 'loginForm' // a unique name for this form
+})(Login);
+
 export default Login;
