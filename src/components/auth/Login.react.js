@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
+import { customField } from '../common/customField.react';
+
+import * as validates from '../../helpers/form_validation';
+
 import './css/login.css';
 
 class Login extends Component {
@@ -28,23 +32,24 @@ class Login extends Component {
                			<form onSubmit={handleSubmit(this.onSubmitBind)}>
 
                				<div className="form-group">
-               					<label htmlFor="userEmail">
-               						Email address
-               					</label>
-                        <Field name="userEmail"
-                               component="input"
+               				  <Field name="email"
                                type="email"
+                               component={customField} label="Email"
                                className="form-control"
-                               id="userEmail"
-                               autoFocus
-                               />
+                               validate={[validates.required, validates.email]}
+                         />
                				</div>
 
                				<div className="form-group">
                					<label htmlFor="userPassword">
                						Password
                					</label>
-                        <Field name="userPassword" component="input" type="password" className="form-control" id="userPassword"/>
+                        <Field name="userPassword"
+                               type="password"
+                               component={customField}
+                               className="form-control"
+                               validate={[validates.required, validates.password]}
+                        />
                				</div>
                				<button type="submit" className="btn btn-default pull-right">
                					Submit
