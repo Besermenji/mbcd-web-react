@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect }                     from 'react-redux';
+import { bindActionCreators }          from 'redux';
 
+// components
 import { customField } from '../common/customField.react';
 
+// actions
+import {
+  login,
+} from '../../actions/auth';
+
+// helpers
 import * as validates from '../../helpers/form_validation';
 
+// css
 import './css/login.css';
 
 class Login extends Component {
@@ -14,7 +24,7 @@ class Login extends Component {
   }
 
   onSubmit(values) {
-    console.log("AADasdlmaskldmaklsdmklasmdklasmdklasmkldmaskld", values);
+    this.props.login(values);
   }
 
  render() {
@@ -41,11 +51,9 @@ class Login extends Component {
                				</div>
 
                				<div className="form-group">
-               					<label htmlFor="userPassword">
-               						Password
-               					</label>
-                        <Field name="userPassword"
+               				  <Field name="password"
                                type="password"
+                               label="password"
                                component={customField}
                                className="form-control"
                                validate={[validates.required, validates.password]}
@@ -71,9 +79,20 @@ class Login extends Component {
    );
  }
 }
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const dispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    login,
+  }, dispatch)
+}
+
 // Decorate the form component
 Login = reduxForm({
   form: 'loginForm' // a unique name for this form
 })(Login);
 
-export default Login;
+export default connect(mapStateToProps, dispatchToProps)(Login);
