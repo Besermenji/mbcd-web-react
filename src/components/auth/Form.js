@@ -1,7 +1,6 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-
 //components
 import { customField } from '../common/customField.react';
 
@@ -31,7 +30,10 @@ const TodoList = (props) => {
                validate={[validates.required, validates.password]}
         />
       </div>
-      <button type="submit" className="btn btn-default pull-right">
+      <button type="submit"
+              className="btn btn-default pull-right"
+              disabled={props.submitInProgress}
+      >
         Submit
       </button>
 

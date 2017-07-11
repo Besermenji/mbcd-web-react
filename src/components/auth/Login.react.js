@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect }                     from 'react-redux';
 import { bindActionCreators }          from 'redux';
+import NotificationSystem from 'react-notification-system';
 
 // components
 import Form from './Form'
@@ -15,13 +16,37 @@ import './css/login.css';
 
 class Login extends Component {
 
+componentDidMount() {
+  this._notificationSystem = this.refs.notificationSystem;
+}
+
+addNotification(event) {
+  this._notificationSystem.addNotification({
+    message: 'Login failed',
+    level: 'error',
+    position: 'tc',
+  });
+}
+
   onSubmit = (values) => {
-    this.props.login(values);
+    const {
+      login,
+      loginError,
+    } = this.props;
+    login(values).then(() => {
+      if(!!loginError) {
+        this.addNotification()
+      }
+      else {
+        // redirect to a cool page
+      }
+    })
   }
 
  render() {
    const {
      handleSubmit,
+     inProgress,
    } = this.props
    return (
      <div className="container-fluid">
@@ -31,7 +56,10 @@ class Login extends Component {
               <div className="col-md-6 login-border">
                 <div className="row">
                		<div className="col-md-12">
-               			<Form handleSubmit={handleSubmit(this.onSubmit)}/>
+               			<Form handleSubmit={handleSubmit(this.onSubmit)}
+                          submitInProgress={inProgress}
+                    />
+                    <NotificationSystem ref="notificationSystem" />
                		</div>
                	</div>
               </div>
@@ -48,6 +76,8 @@ class Login extends Component {
 }
 const mapStateToProps = (state) => {
   return {
+    inProgress: state.auth.inProgress,
+    loginError: state.auth.error,
   }
 }
 
