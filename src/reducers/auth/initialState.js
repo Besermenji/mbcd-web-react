@@ -1,6 +1,6 @@
 const initialState = {
   inProgress: false,
-  error: ``,
+  error: ``
 }
 
-export default initialState;
+export default initialState

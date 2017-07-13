@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 import { connect }                     from 'react-redux';
 import { bindActionCreators }          from 'redux';
 import NotificationSystem from 'react-notification-system';
+import { browserHistory } from 'react-router'
 
 // components
 import Form from './Form'
@@ -22,23 +23,19 @@ componentDidMount() {
 
 addNotification(event) {
   this._notificationSystem.addNotification({
-    message: 'Login failed',
+    message: this.props.loginError,
     level: 'error',
     position: 'tc',
   });
 }
 
   onSubmit = (values) => {
-    const {
-      login,
-      loginError,
-    } = this.props;
-    login(values).then(() => {
-      if(!!loginError) {
+    this.props.login(values).then(() => {
+      if(!!this.props.loginError) {
         this.addNotification()
       }
       else {
-        // redirect to a cool page
+        browserHistory.push('/')
       }
     })
   }

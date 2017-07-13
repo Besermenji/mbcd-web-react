@@ -1,5 +1,8 @@
-import initialState from './initialState';
-import * as actions from '../../constants/auth';
+import initialState from './initialState'
+import * as actions from '../../constants/auth'
+import {
+  saveToken
+} from '../../helpers/auth'
 
 const auth = (state = initialState, action) => {
   switch (action.type) {
@@ -8,25 +11,31 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         inProgress: true,
-        error: ``,
+        error: ``
       }
 
     case actions.REGISTER_SUCCESS:
+      return {
+        ...state,
+        inProgress: false
+      }
     case actions.LOGIN_SUCCESS:
+      saveToken(action.payload.auth_token)
       return {
         ...state,
         inProgress: false
       }
     case actions.REGISTER_FAILURE:
     case actions.LOGIN_FAILURE:
+      console.log('action', action)
       return {
         ...state,
         inProgress: false,
-        error: `error`,
+        error: action.payload.message
       }
     default:
-      return state;
+      return state
   }
-};
+}
 
-export default auth;
+export default auth

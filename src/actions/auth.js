@@ -1,5 +1,5 @@
-import { CALL_API } from 'redux-api-middleware';
-import * as actions from '../constants/auth.js';
+import { CALL_API } from 'redux-api-middleware'
+import * as actions from '../constants/auth.js'
 
 export const login = (data) => ({
   [CALL_API]: {
@@ -9,8 +9,7 @@ export const login = (data) => ({
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   }
-});
-
+})
 
 export const register = (data) => ({
   [CALL_API]: {
@@ -20,4 +19,4 @@ export const register = (data) => ({
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   }
-});
+})
