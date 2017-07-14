@@ -3,6 +3,11 @@
     src: url(./assets/fonts/raleway/Raleway-Regular.ttf);
 }
 
+@font-face {
+  font-family: Raleway-Heavy;
+  src: url(./assets/fonts/raleway/Raleway-Heavy.ttf);
+}
+
 .App {
   font-family: 'Raleway-Regular';
   background-color: #202020;

@@ -15,7 +15,7 @@ const Form = (props) => {
         <Field name='email'
           type='email'
           component={customField} label='Email'
-          className='form-control'
+          className='auth-input'
           validate={[validates.required, validates.email]}
          />
       </div>
@@ -25,15 +25,15 @@ const Form = (props) => {
           type='password'
           label='password'
           component={customField}
-          className='form-control'
+          className='auth-input'
           validate={[validates.required, validates.password]}
         />
       </div>
       <button type='submit'
-        className='btn btn-default pull-right'
+        className='pull-right auth-submit'
         disabled={props.submitInProgress}
       >
-        Submit
+        {props.buttonName}
       </button>
 
     </form>

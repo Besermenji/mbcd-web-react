@@ -3,7 +3,7 @@ import { reduxForm } from 'redux-form';
 import { connect }                     from 'react-redux';
 import { bindActionCreators }          from 'redux';
 import NotificationSystem from 'react-notification-system';
-import { browserHistory } from 'react-router'
+import { browserHistory, Link } from 'react-router'
 
 // components
 import Form from './Form'
@@ -58,14 +58,16 @@ class Register extends Component {
               <div className="col-md-6 login-border">
                 <div className="row">
                		<div className="col-md-12">
-               			<Form handleSubmit={handleSubmit(this.onSubmit)} submitInProgress={inProgress}/>
+               			<Form handleSubmit={handleSubmit(this.onSubmit)}
+                          submitInProgress={inProgress}
+                          buttonName="Sign In"
+                    />
                     <NotificationSystem ref="notificationSystem" />
                   </div>
                	</div>
               </div>
               <div className="col-md-6">
-                <p>facebook</p>
-                <p>google</p>
+                <Link className="auth-link" to='/login'>Log In</Link>
               </div>
             </div>
           </div>

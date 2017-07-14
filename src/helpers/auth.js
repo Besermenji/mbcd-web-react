@@ -7,3 +7,7 @@ export const saveToken = (token) => {
 export const isAuthenticated = () => {
   return !!localStorage.getItem(authToken)
 }
+
+export const removeToken = () => {
+  localStorage.removeItem(authToken);
+}
