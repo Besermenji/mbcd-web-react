@@ -1,0 +1,43 @@
+.login-margin-top {
+  margin-top: 25vh;
+}
+
+.login-border {
+  border-right-style: solid;
+  border-right-color: #f8f8f8;
+  border-width: 2px;
+}
+
+.auth-input {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 2px;
+  background-color: transparent;
+  border-style: solid;
+  border-color: white;
+  width: 100%;
+}
+
+.auth-submit {
+  outline: none;
+  padding: 5px;
+  border: 0px;
+  box-sizing: none;
+  background-color: transparent;
+  font-size: 25px;
+  font-family: Raleway-Heavy;
+}
+
+.auth-link {
+  font-family: Raleway-Heavy;
+  font-size: 25px;
+  color: white;
+}
+
+.auth-link:hover {
+  font-family: Raleway-Heavy;
+  font-size: 25px;
+  color: white;
+  text-decoration: none;
+}

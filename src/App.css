@@ -1,5 +1,18 @@
+@font-face {
+    font-family: Raleway-Regular;
+    src: url(./assets/fonts/raleway/Raleway-Regular.ttf);
+}
+
+@font-face {
+  font-family: Raleway-Heavy;
+  src: url(./assets/fonts/raleway/Raleway-Heavy.ttf);
+}
+
 .App {
-  text-align: center;
+  font-family: 'Raleway-Regular';
+  background-color: #202020;
+  color: #f8f8f8;
+  height: 100vh;
 }
 
 .App-logo {
