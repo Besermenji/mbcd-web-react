@@ -10,6 +10,7 @@ import Form from './Form'
 // actions
 import {
   login,
+  removeRegisterFlag,
 } from '../../actions/auth';
 
 // css
@@ -19,20 +20,25 @@ class Login extends Component {
 
 componentDidMount() {
   this._notificationSystem = this.refs.notificationSystem;
+
+  if (this.props.fromRegister) {
+    this.addNotification('Success! Please Log In to continue!','success','tc')
+    this.props.removeRegisterFlag()
+  }
 }
 
-addNotification(event) {
+addNotification(message, level, position) {
   this._notificationSystem.addNotification({
-    message: this.props.loginError,
-    level: 'error',
-    position: 'tc',
+    message: message,
+    level: level,
+    position: position,
   });
 }
 
   onSubmit = (values) => {
     this.props.login(values).then(() => {
       if(!!this.props.loginError) {
-        this.addNotification()
+        this.addNotification(this.props.loginError, 'error', 'tc')
       }
       else {
         browserHistory.push('/')
@@ -75,12 +81,14 @@ const mapStateToProps = (state) => {
   return {
     inProgress: state.auth.inProgress,
     loginError: state.auth.error,
+    fromRegister: state.auth.fromRegister,
   }
 }
 
 const dispatchToProps = (dispatch) => {
   return bindActionCreators({
     login,
+    removeRegisterFlag,
   }, dispatch)
 }
 

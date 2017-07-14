@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect }                     from 'react-redux';
 import { bindActionCreators }          from 'redux';
+import NotificationSystem from 'react-notification-system';
+import { browserHistory } from 'react-router'
 
 // components
 import Form from './Form'
@@ -15,19 +17,38 @@ import './css/login.css';
 
 class Register extends Component {
 
+  componentDidMount() {
+    this._notificationSystem = this.refs.notificationSystem;
+  }
+
+  addNotification(message, level, position) {
+    this._notificationSystem.addNotification({
+      message: message,
+      level: level,
+      position: position,
+    });
+  }
+
   onSubmit = (values) => {
-    console.log(values)
     const registrationObj = {
       email: values.email,
       password: values.password,
       password_confirmation: values.password
     }
-    this.props.register(registrationObj);
+    this.props.register(registrationObj).then(() => {
+      if(!!this.props.registerError) {
+        this.addNotification(this.props.registerError, 'error', 'tc')
+      }
+      else {
+        browserHistory.push('/login')
+      }
+    })
   }
 
  render() {
    const {
      handleSubmit,
+     inProgress,
    } = this.props
    return (
      <div className="container-fluid">
@@ -37,8 +58,9 @@ class Register extends Component {
               <div className="col-md-6 login-border">
                 <div className="row">
                		<div className="col-md-12">
-               			<Form handleSubmit={handleSubmit(this.onSubmit)}/>
-               		</div>
+               			<Form handleSubmit={handleSubmit(this.onSubmit)} submitInProgress={inProgress}/>
+                    <NotificationSystem ref="notificationSystem" />
+                  </div>
                	</div>
               </div>
               <div className="col-md-6">
@@ -54,6 +76,8 @@ class Register extends Component {
 }
 const mapStateToProps = (state) => {
   return {
+    inProgress: state.auth.inProgress,
+    registerError: state.auth.error,
   }
 }
 

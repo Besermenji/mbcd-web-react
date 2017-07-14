@@ -20,3 +20,7 @@ export const register = (data) => ({
     body: JSON.stringify(data)
   }
 })
+
+export const removeRegisterFlag = () => ({
+  type: actions.REMOVE_REGISTER_FLAG
+})
