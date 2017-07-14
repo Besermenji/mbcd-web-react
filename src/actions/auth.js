@@ -9,7 +9,7 @@ export const login = (data) => ({
     types: [actions.LOGIN, actions.LOGIN_SUCCESS, actions.LOGIN_FAILURE],
     endpoint: `${apiUrl}/v1/auth_user`,
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Credentials': true },
     body: JSON.stringify(data)
   }
 })
@@ -19,7 +19,7 @@ export const register = (data) => ({
     types: [actions.REGISTER, actions.REGISTER_SUCCESS, actions.REGISTER_FAILURE],
     endpoint: `${apiUrl}/v1/users`,
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Credentials': true },
     body: JSON.stringify(data)
   }
 })
